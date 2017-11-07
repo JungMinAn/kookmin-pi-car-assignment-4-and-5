@@ -88,21 +88,21 @@ LeftPwm = GPIO.PWM(MotorLeft_PWM, 100)
 RightPwm = GPIO.PWM(MotorRight_PWM, 100)
 
 
-def rightSwingTurn(speed, running_time):
+def rightSwingTurn(speed1,speed2, running_time):
     leftmotor(forward1)
     GPIO.output(MotorLeft_PWM, GPIO.HIGH)
     GPIO.output(MotorRight_PWM, GPIO.LOW)
-    LeftPwm.ChangeDutyCycle(speed)
-    RightPwm.ChangeDutyCycle(0)
+    LeftPwm.ChangeDutyCycle(speed1)
+    RightPwm.ChangeDutyCycle(speed2)
     time.sleep(running_time)
 
 
-def leftSwingTurn(speed, running_time):
+def leftSwingTurn(speed1, speed2, running_time):
     GPIO.output(MotorLeft_PWM, GPIO.LOW)
     rightmotor(forward0)
     GPIO.output(MotorRight_PWM, GPIO.HIGH)
-    LeftPwm.ChangeDutyCycle(0)
-    RightPwm.ChangeDutyCycle(speed)
+    LeftPwm.ChangeDutyCycle(speed2)
+    RightPwm.ChangeDutyCycle(speed1)
     time.sleep(running_time)
 
 
@@ -190,6 +190,79 @@ def pwm_low():
     LeftPwm.ChangeDutyCycle(0)
     RightPwm.ChangeDutyCycle(0)
     GPIO.cleanup()
+
+def linetracing():
+    a = int(GPIO.input(leftmostled))
+    b = int(GPIO.input(leftlessled))
+    c = int(GPIO.input(centerled))
+    d = int(GPIO.input(rightlessled))
+    e = int(GPIO.input(rightmostled))
+    if (a == 0)&(b == 0)&(c ==0)&(d == 0)&(e == 0):
+        rightPointTurn(40,2)
+    elif (a == 0) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
+        rightSwingTurn(50,40,1)
+    elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
+        time.sleep(1)
+    elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
+        rightSwingTurn(50, 40, 1)
+    elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 0):
+        time.sleep(1)
+    elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 1):
+        time.sleep(1)
+    elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 0):
+        time.sleep(1)
+    elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
+        leftSwingTurn(50,40,1)
+    elif (a == 0) & (b == 1) & (c == 0) & (d == 0) & (e == 0):
+        time.sleep(1)
+    elif (a == 0) & (b == 1) & (c == 0) & (d == 0) & (e == 1):
+        time.sleep(1)
+    elif (a == 0) & (b == 1) & (c == 0) & (d == 1) & (e == 0):
+        time.sleep(1)
+    elif (a == 0) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
+        time.sleep(1)
+    elif (a == 0) & (b == 1) & (c == 1) & (d == 0) & (e == 0):
+        time.sleep(1)
+    elif (a == 0) & (b == 1) & (c == 1) & (d == 0) & (e == 1):
+        time.sleep(1)
+    elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
+        time.sleep(1)
+    elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
+        rightSwingTurn(50,40,1)
+    elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 0):
+
+    elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
+        go_forward_any(50)
+    elif (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
+        time.sleep(1)
+    elif (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
+        leftSwingTurn(50,45,1)
+    elif (a == 1) & (b == 0) & (c == 1) & (d == 0) & (e == 0):
+        time.sleep(1)
+    elif (a == 1) & (b == 0) & (c == 1) & (d == 0) & (e == 1):
+        time.sleep(1)
+    elif (a == 1) & (b == 0) & (c == 1) & (d == 1) & (e == 0):
+        time.sleep(1)
+    elif (a == 1) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
+        rightSwingTurn(50,40,1)
+    elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 0):
+        leftSwingTurn(50,40,1)
+    elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 1):
+        rightSwingTurn(50,45,1)
+    elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 0):
+        time.sleep(1)
+    elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
+        go_forward(30,0.5)
+    elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 0):
+        rightSwingTurn(50,40,1)
+    elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 1):
+        rightSwingTurn(50,45,1)
+    elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
+        rightSwingTurn(50,40,1)
+    elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
+        rightPointTurn(40,2)
+
+
 
 # =======================================================================
 # declare the pins of 16, 18, 22, 40, 32 in the Rapberry Pi
