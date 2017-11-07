@@ -230,7 +230,7 @@ def linetracing():
     elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
         rightSwingTurn(50,40,1)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 0):
-
+        leftSwingTurn(30,0,1)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
         go_forward_any(50)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
