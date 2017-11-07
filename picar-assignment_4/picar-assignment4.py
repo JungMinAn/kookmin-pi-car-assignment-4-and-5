@@ -9,7 +9,6 @@ import time
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 
-pwm_setup()
 
 trig = 33
 echo = 31
@@ -133,7 +132,6 @@ def go_forward_any(speed):
     GPIO.output(MotorLeft_PWM, GPIO.HIGH)
 
     rightmotor(forward0)
-    rightmotor(forward1)
     GPIO.output(MotorRight_PWM, GPIO.HIGH)
     LeftPwm.ChangeDutyCycle(speed)
     RightPwm.ChangeDutyCycle(speed)
@@ -155,7 +153,6 @@ def go_forward(speed, running_time):
     leftmotor(forward1)
     GPIO.output(MotorLeft_PWM, GPIO.HIGH)
     rightmotor(forward0)
-    rightmotor(forward1)
     GPIO.output(MotorRight_PWM, GPIO.HIGH)
     LeftPwm.ChangeDutyCycle(speed)
     RightPwm.ChangeDutyCycle(speed)
@@ -185,6 +182,7 @@ def pwm_setup():
     LeftPwm.start(0)
     RightPwm.start(0)
 
+pwm_setup()
 
 def pwm_low():
     GPIO.output(MotorLeft_PWM, GPIO.LOW)
@@ -225,11 +223,13 @@ def pwm_low():
 #                   black line locates below the rightmostled of the moving object
 # =======================================================================
 
+dis = 20
 leftmostled = 16
 leftlessled = 18
 centerled = 22
 rightlessled = 40
 rightmostled = 32
+fbn = 0
 
 # =======================================================================
 # because the connetions between 5-way tracking sensor and Rapberry Pi has been
@@ -281,7 +281,26 @@ try:
         print("centerled    detects black line(0) or white ground(1): " + str(GPIO.input(centerled)))
         print("rightlessled detects black line(0) or white ground(1): " + str(GPIO.input(rightlessled)))
         print("rightmostled detects black line(0) or white ground(1): " + str(GPIO.input(rightmostled)))
-        time.sleep(1)
+        distance = getDistance()
+        print('distance= ', distance)
+
+        # when the distance is above the dis, moving object forwards
+        if (distance > dis):
+            go_forward_any(20)
+
+        # when the distance is below the dis, moving object stops
+        else:
+            # stop and wait 1 second
+            stop()
+            time.sleep(1)
+            if fbn == 0:
+                leftPointTurn(20, 0.35)
+                fbn += 1
+            elif fbn == 1:
+                leftSwingTurn(20, 0.9)
+                fbn -= 1
+
+            time.sleep(1)
 
 except KeyboardInterrupt:
     # the speed of left motor will be set as LOW
