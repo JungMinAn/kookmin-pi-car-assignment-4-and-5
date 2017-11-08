@@ -189,19 +189,19 @@ def go_forward_any(speed1, speed2):
     RightPwm.ChangeDutyCycle(speed2)
 
 
-def go_backward_any(speed):
-    """
-    Backward module
-    :param speed: Motor running speed
-    """
-    leftmotor(forward0)
-    leftmotor(forward1)
-    GPIO.output(MotorLeft_PWM, GPIO.HIGH)
-    rightmotor(forward0)
-    rightmotor(forward1)
-    GPIO.output(MotorRight_PWM, GPIO.HIGH)
-    LeftPwm.ChangeDutyCycle(speed)
-    RightPwm.ChangeDutyCycle(speed)
+# def go_backward_any(speed):
+#     """
+#     Backward module
+#     :param speed: Motor running speed
+#     """
+#     leftmotor(forward0)
+#     leftmotor(forward1)
+#     GPIO.output(MotorLeft_PWM, GPIO.HIGH)
+#     rightmotor(forward0)
+#     rightmotor(forward1)
+#     GPIO.output(MotorRight_PWM, GPIO.HIGH)
+#     LeftPwm.ChangeDutyCycle(speed)
+#     RightPwm.ChangeDutyCycle(speed)
 
 
 def go_forward(speed, running_time):
@@ -220,21 +220,21 @@ def go_forward(speed, running_time):
     time.sleep(running_time)
 
 
-def go_backward(speed, running_time):
-    """
-    Backward module (time limit)
-    :param speed: Motor running speed
-    :param running_time: Motor running time
-    """
-    rightmotor(backward0)
-    rightmotor(backward1)
-    GPIO.output(MotorRight_PWM, GPIO.HIGH)
-    leftmotor(backward0)
-    leftmotor(backward1)
-    GPIO.output(MotorLeft_PWM, GPIO.HIGH)
-    LeftPwm.ChangeDutyCycle(speed)
-    RightPwm.ChangeDutyCycle(speed)
-    time.sleep(running_time)
+# def go_backward(speed, running_time):
+#     """
+#     Backward module (time limit)
+#     :param speed: Motor running speed
+#     :param running_time: Motor running time
+#     """
+#     rightmotor(backward0)
+#     rightmotor(backward1)
+#     GPIO.output(MotorRight_PWM, GPIO.HIGH)
+#     leftmotor(backward0)
+#     leftmotor(backward1)
+#     GPIO.output(MotorLeft_PWM, GPIO.HIGH)
+#     LeftPwm.ChangeDutyCycle(speed)
+#     RightPwm.ChangeDutyCycle(speed)
+#     time.sleep(running_time)
 
 
 def stop():
@@ -291,7 +291,7 @@ def linetracing():
     elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
-        go_forward_any(40, 50)
+        go_forward_any(13, 50)
     elif (a == 0) & (b == 1) & (c == 0) & (d == 0) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 1) & (c == 0) & (d == 0) & (e == 1):
@@ -307,15 +307,15 @@ def linetracing():
     elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-        go_forward_any(37, 50)
+        go_forward_any(12, 50)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 0):
         go_forward_any(0, 20)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
-        go_forward_any(50, 50)
+        go_forward_any(40, 40)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(45, 50)
+        go_forward_any(35, 40)
     elif (a == 1) & (b == 0) & (c == 1) & (d == 0) & (e == 0):
         time.sleep(1)
     elif (a == 1) & (b == 0) & (c == 1) & (d == 0) & (e == 1):
@@ -323,21 +323,21 @@ def linetracing():
     elif (a == 1) & (b == 0) & (c == 1) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 1) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
-        go_forward_any(40, 50)
+        go_forward_any(30, 40)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 0):
-        go_forward_any(50, 40)
+        go_forward_any(40, 30)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 1):
-        go_forward_any(50, 45)
+        go_forward_any(40, 35)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(50, 50)
+        go_forward_any(40, 40)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 0):
-        go_forward_any(50, 40)
+        go_forward_any(40, 30)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 1):
-        go_forward_any(50, 45)
+        go_forward_any(40, 35)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
-        go_forward_any(50, 37)
+        go_forward_any(40, 27)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
         go_forward_any(0, 40)
 
@@ -377,7 +377,7 @@ def linetracing():
 
 
 # declare the pins of 16, 18, 22, 40, 32 in the Rapberry Pi
-dis = 20
+dis = 15
 leftmostled = 16
 leftlessled = 18
 centerled = 22
@@ -446,19 +446,19 @@ try:
             # stop and wait 1 second
             stop()
             time.sleep(1)
-            rightPointTurn(30, 0.35)
+            rightPointTurn(37, 0.38)
             time.sleep(1)
-            go_forward(40, 1.5)
+            go_forward(38, 0.3)
             time.sleep(1)
-            leftPointTurn(30, 0.35)
-            time.sleep(1)
-            go_forward(40, 1.5)
-            time.sleep(1)
-            leftPointTurn(30, 0.35)
-            time.sleep(1)
-            go_forward(40, 1.5)
-            time.sleep(1)
-            rightPointTurn(30, 0.35)
+            while((int(GPIO.input(leftmostled)) == 1) & (int(GPIO.input(leftlessled)) == 1) & (int(GPIO.input(centerled)) == 1) & (int(GPIO.input(rightmostled)) == 1) & (int(GPIO.input(rightlessled)) == 1)):
+                leftPointTurn(33, 0.35)
+                time.sleep(1)
+                go_forward(42, 0.7)
+                time.sleep(1)
+                leftPointTurn(31, 0.35)
+                time.sleep(1)
+                go_forward(30, 0.28)
+                time.sleep(1)
 
 # Keyboard Interrupt
 except KeyboardInterrupt:
