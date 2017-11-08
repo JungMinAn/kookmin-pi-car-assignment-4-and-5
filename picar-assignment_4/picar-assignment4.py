@@ -6,14 +6,13 @@
 # Import raspberry pi's GPIO module and time module
 # (if ImportError, running FakeRPi.GPIO)
 # for travis-ci (auto build system)
-import importlib.util
+import imp
 
 try:
-    importlib.util.find_spec('RPi.GPIO')
+    imp.find_module('RPi.GPIO')
     import RPi.GPIO as GPIO
 except ImportError:
     import FakeRPi.GPIO as GPIO
-
 import time
 
 # Disable warning text
