@@ -174,7 +174,7 @@ def leftPointTurn(speed, running_time):
     time.sleep(running_time)
 
 
-def go_forward_any(speed):
+def go_forward_any(speed1, speed2):
     """
     Forward module
     :param speed: Motor running speed
@@ -185,8 +185,8 @@ def go_forward_any(speed):
 
     rightmotor(forward0)
     GPIO.output(MotorRight_PWM, GPIO.HIGH)
-    LeftPwm.ChangeDutyCycle(speed)
-    RightPwm.ChangeDutyCycle(speed)
+    LeftPwm.ChangeDutyCycle(speed1)
+    RightPwm.ChangeDutyCycle(speed2)
 
 
 def go_backward_any(speed):
@@ -277,13 +277,13 @@ def linetracing():
     d = int(GPIO.input(rightlessled))
     e = int(GPIO.input(rightmostled))
     if (a == 0)&(b == 0)&(c ==0)&(d == 0)&(e == 0):
-        rightPointTurn(40,2)
+        go_forward_any(40, 0)
     elif (a == 0) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
-        rightSwingTurn(50,40,1)
+        go_forward_any(20, 0)
     elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
-        rightSwingTurn(50, 40, 1)
+        go_forward_any(20, 0)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 1):
@@ -291,7 +291,7 @@ def linetracing():
     elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
-        leftSwingTurn(50,40,1)
+        go_forward_any(40, 50)
     elif (a == 0) & (b == 1) & (c == 0) & (d == 0) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 1) & (c == 0) & (d == 0) & (e == 1):
@@ -307,15 +307,15 @@ def linetracing():
     elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-        rightSwingTurn(50,40,1)
+        go_forward_any(37, 50)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 0):
-        leftSwingTurn(30,0,1)
+        go_forward_any(0, 20)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
-        go_forward_any(50)
+        go_forward_any(50, 50)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
-        leftSwingTurn(50,45,1)
+        go_forward_any(45, 50)
     elif (a == 1) & (b == 0) & (c == 1) & (d == 0) & (e == 0):
         time.sleep(1)
     elif (a == 1) & (b == 0) & (c == 1) & (d == 0) & (e == 1):
@@ -323,23 +323,23 @@ def linetracing():
     elif (a == 1) & (b == 0) & (c == 1) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 1) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
-        rightSwingTurn(50,40,1)
+        go_forward_any(40, 50)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 0):
-        leftSwingTurn(50,40,1)
+        go_forward_any(50, 40)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 1):
-        rightSwingTurn(50,45,1)
+        go_forward_any(50, 45)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
-        go_forward(30,0.5)
+        go_forward_any(50, 50)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 0):
-        rightSwingTurn(50,40,1)
+        go_forward_any(50, 40)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 1):
-        rightSwingTurn(50,45,1)
+        go_forward_any(50, 45)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
-        rightSwingTurn(50,40,1)
+        go_forward_any(50, 37)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-        rightPointTurn(40,2)
+        go_forward_any(0, 40)
 
 
 
@@ -383,7 +383,6 @@ leftlessled = 18
 centerled = 22
 rightlessled = 40
 rightmostled = 32
-fbn = 0
 
 # =======================================================================
 # because the connetions between 5-way tracking sensor and Rapberry Pi has been
@@ -440,21 +439,26 @@ try:
 
         # when the distance is above the dis, moving object forwards
         if (distance > dis):
-            go_forward_any(20)
+            linetracing()
 
         # when the distance is below the dis, moving object stops
         else:
             # stop and wait 1 second
             stop()
             time.sleep(1)
-            if fbn == 0:
-                leftPointTurn(20, 0.35)
-                fbn += 1
-            elif fbn == 1:
-                leftSwingTurn(20, 0.9)
-                fbn -= 1
-
+            rightPointTurn(30, 0.35)
             time.sleep(1)
+            go_forward(40, 1.5)
+            time.sleep(1)
+            leftPointTurn(30, 0.35)
+            time.sleep(1)
+            go_forward(40, 1.5)
+            time.sleep(1)
+            leftPointTurn(30, 0.35)
+            time.sleep(1)
+            go_forward(40, 1.5)
+            time.sleep(1)
+            rightPointTurn(30, 0.35)
 
 # Keyboard Interrupt
 except KeyboardInterrupt:
