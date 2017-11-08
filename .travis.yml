@@ -1,5 +1,0 @@
-language: python
-python:
-  - "2.7"
-install: pip install git+https://github.com/sn4k3/FakeRPi
-script: python picar-assignment_4/picar-assignment4.py
