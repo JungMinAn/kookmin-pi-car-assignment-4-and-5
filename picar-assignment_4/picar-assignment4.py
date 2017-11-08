@@ -1,23 +1,32 @@
-#########################################################################
+"""
 # Date: 2017/11/06
 # file name: picar-assignment4.py
-#########################################################################
+"""
 
+# Import raspberry pi's GPIO module and time module
 import RPi.GPIO as GPIO
 import time
 
+# Disable warning text
 GPIO.setwarnings(False)
+
+# GPIO mode setting
 GPIO.setmode(GPIO.BOARD)
 
-
+# Trig, echo pin number
 trig = 33
 echo = 31
 
+# Trig, echo in/out setting
 GPIO.setup(trig, GPIO.OUT)
 GPIO.setup(echo, GPIO.IN)
 
 
 def getDistance():
+    """
+    Detect distance
+    :return: distance
+    """
     GPIO.output(trig, False)
     time.sleep(0.5)
     GPIO.output(trig, True)
@@ -34,28 +43,39 @@ def getDistance():
 
 
 def REVERSE(x):
+    """
+    Reverse for forward
+    :return: boolean
+    """
     if x == True:
         return False
     elif x == False:
         return True
 
 
+# Forward boolean
 forward0 = True
 forward1 = False
 
+# Backward define
 backward0 = REVERSE(forward0)
 backward1 = REVERSE(forward1)
 
+# Left motor pin number
 MotorLeft_A = 12
 MotorLeft_B = 11
 MotorLeft_PWM = 35
 
+# Right motor pin number
 MotorRight_A = 15
 MotorRight_B = 13
 MotorRight_PWM = 37
 
 
 def leftmotor(x):
+    """
+    Left motor main define
+    """
     if x == True:
         GPIO.output(MotorLeft_A, GPIO.HIGH)
         GPIO.output(MotorLeft_B, GPIO.LOW)
@@ -68,6 +88,9 @@ def leftmotor(x):
 
 
 def rightmotor(x):
+    """
+    Right motor main define
+    """
     if x == True:
         GPIO.output(MotorRight_A, GPIO.LOW)
         GPIO.output(MotorRight_B, GPIO.HIGH)
@@ -76,19 +99,28 @@ def rightmotor(x):
         GPIO.output(MotorRight_B, GPIO.LOW)
 
 
+# Left motor's GPIO out port setting
 GPIO.setup(MotorLeft_A, GPIO.OUT)
 GPIO.setup(MotorLeft_B, GPIO.OUT)
 GPIO.setup(MotorLeft_PWM, GPIO.OUT)
 
+# Right motor's GPIO out port setting
 GPIO.setup(MotorRight_A, GPIO.OUT)
 GPIO.setup(MotorRight_B, GPIO.OUT)
 GPIO.setup(MotorRight_PWM, GPIO.OUT)
 
+# Motor power up setting
 LeftPwm = GPIO.PWM(MotorLeft_PWM, 100)
 RightPwm = GPIO.PWM(MotorRight_PWM, 100)
 
 
 def rightSwingTurn(speed1,speed2, running_time):
+    """
+    Right swing turn main module
+    :param speed1: Left speed
+    :param speed2: Right speed
+    :param running_time: motor running time
+    """
     leftmotor(forward1)
     GPIO.output(MotorLeft_PWM, GPIO.HIGH)
     GPIO.output(MotorRight_PWM, GPIO.LOW)
@@ -98,6 +130,12 @@ def rightSwingTurn(speed1,speed2, running_time):
 
 
 def leftSwingTurn(speed1, speed2, running_time):
+    """
+    Left swing turn main module
+    :param speed1: Right speed
+    :param speed2: Left speed
+    :param running_time: motor running time
+    """
     GPIO.output(MotorLeft_PWM, GPIO.LOW)
     rightmotor(forward0)
     GPIO.output(MotorRight_PWM, GPIO.HIGH)
@@ -107,6 +145,11 @@ def leftSwingTurn(speed1, speed2, running_time):
 
 
 def rightPointTurn(speed, running_time):
+    """
+    Right point turn main module
+    :param speed: motor running speed
+    :param running_time: motor running time
+    """
     leftmotor(forward1)
     GPIO.output(MotorLeft_PWM, GPIO.HIGH)
     rightmotor(backward0)
@@ -117,6 +160,11 @@ def rightPointTurn(speed, running_time):
 
 
 def leftPointTurn(speed, running_time):
+    """
+    Left point turn main module
+    :param speed: Motor running speed
+    :param running_time: Motor running time
+    """
     rightmotor(forward0)
     GPIO.output(MotorRight_PWM, GPIO.HIGH)
     leftmotor(backward1)
@@ -127,6 +175,10 @@ def leftPointTurn(speed, running_time):
 
 
 def go_forward_any(speed):
+    """
+    Forward module
+    :param speed: Motor running speed
+    """
     leftmotor(forward0)
     leftmotor(forward1)
     GPIO.output(MotorLeft_PWM, GPIO.HIGH)
@@ -138,6 +190,10 @@ def go_forward_any(speed):
 
 
 def go_backward_any(speed):
+    """
+    Backward module
+    :param speed: Motor running speed
+    """
     leftmotor(forward0)
     leftmotor(forward1)
     GPIO.output(MotorLeft_PWM, GPIO.HIGH)
@@ -149,6 +205,11 @@ def go_backward_any(speed):
 
 
 def go_forward(speed, running_time):
+    """
+    Forward module (time limit)
+    :param speed: Motor running speed
+    :param running_time: Motor running time
+    """
     leftmotor(forward0)
     leftmotor(forward1)
     GPIO.output(MotorLeft_PWM, GPIO.HIGH)
@@ -160,6 +221,11 @@ def go_forward(speed, running_time):
 
 
 def go_backward(speed, running_time):
+    """
+    Backward module (time limit)
+    :param speed: Motor running speed
+    :param running_time: Motor running time
+    """
     rightmotor(backward0)
     rightmotor(backward1)
     GPIO.output(MotorRight_PWM, GPIO.HIGH)
@@ -172,6 +238,9 @@ def go_backward(speed, running_time):
 
 
 def stop():
+    """
+    Stop module
+    """
     GPIO.output(MotorLeft_PWM, GPIO.LOW)
     GPIO.output(MotorRight_PWM, GPIO.LOW)
     LeftPwm.ChangeDutyCycle(0)
@@ -179,17 +248,27 @@ def stop():
 
 
 def pwm_setup():
+    """
+    Pwm setup module
+    """
     LeftPwm.start(0)
     RightPwm.start(0)
 
+
+# Running pwm setup
 pwm_setup()
 
+
 def pwm_low():
+    """
+    Pwm low module
+    """
     GPIO.output(MotorLeft_PWM, GPIO.LOW)
     GPIO.output(MotorRight_PWM, GPIO.LOW)
     LeftPwm.ChangeDutyCycle(0)
     RightPwm.ChangeDutyCycle(0)
     GPIO.cleanup()
+
 
 def linetracing():
     a = int(GPIO.input(leftmostled))
@@ -296,6 +375,8 @@ def linetracing():
 #                   black line locates below the rightmostled of the moving object
 # =======================================================================
 
+
+# declare the pins of 16, 18, 22, 40, 32 in the Rapberry Pi
 dis = 20
 leftmostled = 16
 leftlessled = 18
@@ -375,6 +456,7 @@ try:
 
             time.sleep(1)
 
+# Keyboard Interrupt
 except KeyboardInterrupt:
     # the speed of left motor will be set as LOW
     GPIO.output(MotorLeft_PWM, GPIO.LOW)
