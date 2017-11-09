@@ -36,8 +36,8 @@ def getDistance():
         pulse_start = time.time()
     while GPIO.input(echo) == 1:
         pulse_end = time.time()
-    pulse_duration = pulse_end-pulse_start
-    distance = pulse_duration*17000
+    pulse_duration = pulse_end - pulse_start
+    distance = pulse_duration * 17000
     distance = round(distance, 2)
     return distance
 
@@ -114,7 +114,7 @@ LeftPwm = GPIO.PWM(MotorLeft_PWM, 100)
 RightPwm = GPIO.PWM(MotorRight_PWM, 100)
 
 
-def rightSwingTurn(speed1,speed2, running_time):
+def rightSwingTurn(speed1, speed2, running_time):
     """
     Right swing turn main module
     :param speed1: Left speed
@@ -280,14 +280,14 @@ def linetracing():
     c = int(GPIO.input(centerled))
     d = int(GPIO.input(rightlessled))
     e = int(GPIO.input(rightmostled))
-    if (a == 0)&(b == 0)&(c ==0)&(d == 0)&(e == 0):
+    if (a == 0) & (b == 0) & (c == 0) & (d == 0) & (e == 0):
         go_forward_any(0, 0)
     elif (a == 0) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
         go_forward_any(20, 0)
     elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(50, 40)
+        go_forward_any(45, 35)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 1):
@@ -315,11 +315,11 @@ def linetracing():
     elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 0):
         go_forward_any(0, 20)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
-        go_forward_any(40, 40)
+        go_forward_any(35, 35)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(35, 40)
+        go_forward_any(30, 35)
     elif (a == 1) & (b == 0) & (c == 1) & (d == 0) & (e == 0):
         time.sleep(1)
     elif (a == 1) & (b == 0) & (c == 1) & (d == 0) & (e == 1):
@@ -327,23 +327,23 @@ def linetracing():
     elif (a == 1) & (b == 0) & (c == 1) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 1) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
-        go_forward_any(30, 40)
+        go_forward_any(25, 35)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 0):
-        go_forward_any(40, 30)
+        go_forward_any(50, 35)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 1):
         go_forward_any(40, 35)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(40, 40)
+        go_forward_any(35, 35)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 0):
-        go_forward_any(40, 30)
+        go_forward_any(50, 13)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 1):
-        go_forward_any(40, 35)
+        go_forward_any(35, 30)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
         go_forward_any(40, 27)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-        go_forward_any(0, 40)
+        go_forward_any(40, 0)
 
 
 # 5-way tracking sensor's pin number
@@ -380,20 +380,19 @@ try:
         else:
             stop()
             time.sleep(1)
-            leftPointTurn(34, 0.38)
+            rightPointTurn(34, 0.38)
             time.sleep(1)
             go_forward(38, 0.3)
             time.sleep(1)
-            rightPointTurn(33, 0.35)
+            leftPointTurn(33, 0.35)
             time.sleep(1)
-            go_forward(42, 0.6)
+            go_forward(42, 0.8)
             time.sleep(1)
-            rightPointTurn(31, 0.35)
+            leftPointTurn(31, 0.35)
             time.sleep(1)
             go_forward(30, 0.28)
             time.sleep(1)
-            leftPointTurn(28, 0.35)
-
+            rightPointTurn(28, 0.35)
 
 # Keyboard Interrupt
 except KeyboardInterrupt:
@@ -407,7 +406,3 @@ except KeyboardInterrupt:
     RightPwm.ChangeDutyCycle(0)
     # GPIO pin setup has been cleared
     GPIO.cleanup()
-
-
-
-
