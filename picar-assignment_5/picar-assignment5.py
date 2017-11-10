@@ -137,6 +137,17 @@ def rightPointTurn(speed, running_time):
     RightPwm.ChangeDutyCycle(speed)
     time.sleep(running_time)
 
+def rightPointTurn_any(speed):
+    """
+    Right point turn main module
+    :param speed: motor running speed
+    """
+    leftmotor(forward1)
+    GPIO.output(MotorLeft_PWM, GPIO.HIGH)
+    rightmotor(backward0)
+    GPIO.output(MotorRight_PWM, GPIO.HIGH)
+    LeftPwm.ChangeDutyCycle(speed)
+    RightPwm.ChangeDutyCycle(speed)
 
 def leftPointTurn(speed, running_time):
     """
@@ -152,6 +163,17 @@ def leftPointTurn(speed, running_time):
     RightPwm.ChangeDutyCycle(speed)
     time.sleep(running_time)
 
+def leftPointTurn_any(speed,):
+    """
+    Left point turn main module
+    :param speed: Motor running speed
+    """
+    rightmotor(forward0)
+    GPIO.output(MotorRight_PWM, GPIO.HIGH)
+    leftmotor(backward1)
+    GPIO.output(MotorLeft_PWM, GPIO.HIGH)
+    LeftPwm.ChangeDutyCycle(speed)
+    RightPwm.ChangeDutyCycle(speed)
 
 def go_forward_any(speed1, speed2):
     """
@@ -260,13 +282,22 @@ def linetracing():
     d = int(GPIO.input(rightlessled))
     e = int(GPIO.input(rightmostled))
     if (a == 0)&(b == 0)&(c ==0)&(d == 0)&(e == 0):
-        go_forward_any(0, 0)
+        go_forward(50, 0.15)
+        rightPointTurn_any(25)
     elif (a == 0) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
-        go_forward_any(20, 0)
+        go_forward(50, 0.15)
+        if (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
+            leftPointTurn_any(25)
+        else:
+            go_forward_any(30, 30)
     elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(50, 40)
+        go_forward(50, 0.15)
+        if (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
+            leftPointTurn_any(25)
+        else:
+            go_forward_any(30, 30)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 1):
@@ -274,7 +305,11 @@ def linetracing():
     elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
-        go_forward_any(13, 50)
+        go_forward(50, 0.15)
+        if (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
+            leftPointTurn_any(25)
+        else:
+            go_forward_any(30, 30)
     elif (a == 0) & (b == 1) & (c == 0) & (d == 0) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 1) & (c == 0) & (d == 0) & (e == 1):
@@ -290,9 +325,10 @@ def linetracing():
     elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-        go_forward_any(12, 50)
+        go_forward_any(20, 28)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 0):
-        go_forward_any(0, 20)
+        go_forward(50, 0.15)
+        rightPointTurn_any(25)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
         go_forward_any(40, 40)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
@@ -308,21 +344,22 @@ def linetracing():
     elif (a == 1) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
         go_forward_any(30, 40)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 0):
-        go_forward_any(40, 30)
+        go_forward(50, 0.15)
+        rightPointTurn_any(25)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 1):
-        go_forward_any(40, 35)
+        go_forward_any(30, 25)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(40, 40)
+        go_forward_any(30, 30)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 0):
-        go_forward_any(40, 30)
+        go_forward_any(30, 20)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 1):
-        go_forward_any(40, 35)
+        go_forward_any(30, 25)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
-        go_forward_any(40, 27)
+        go_forward_any(30, 17)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-        go_forward_any(0, 40)
+        rightPointTurn_any(25)
 
 
 # 5-way tracking sensor's pin number
