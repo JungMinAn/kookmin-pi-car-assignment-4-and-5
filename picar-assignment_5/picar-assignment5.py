@@ -348,8 +348,6 @@ try:
         print("centerled    detects black line(0) or white ground(1): " + str(GPIO.input(centerled)))
         print("rightlessled detects black line(0) or white ground(1): " + str(GPIO.input(rightlessled)))
         print("rightmostled detects black line(0) or white ground(1): " + str(GPIO.input(rightmostled)))
-        distance = getDistance()
-        print('distance= ', distance)
 
         linetracing()
 
