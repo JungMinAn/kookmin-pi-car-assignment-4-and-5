@@ -351,10 +351,8 @@ try:
         distance = getDistance()
         print('distance= ', distance)
 
-        # when the distance is above the dis, moving object forwards
         linetracing()
 
-        # when the distance is below the dis, moving object stops
         # else:
 
 
