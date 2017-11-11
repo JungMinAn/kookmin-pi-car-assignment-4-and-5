@@ -273,7 +273,7 @@ def pwm_low():
 def linetracing():
     """
     Line tracing module
-    0 = white, 1 = black
+    0 = black, 1 = white
     """
     a = int(GPIO.input(leftmostled))
     b = int(GPIO.input(leftlessled))
