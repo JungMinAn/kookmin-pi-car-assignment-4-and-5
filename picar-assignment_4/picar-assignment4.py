@@ -273,7 +273,7 @@ def pwm_low():
 def linetracing():
     """
     Line tracing module
-    0 = white, 1 = black
+    0 = black, 1 = white
     """
     a = int(GPIO.input(leftmostled))
     b = int(GPIO.input(leftlessled))
@@ -287,7 +287,7 @@ def linetracing():
     elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(50, 40)
+        go_forward_any(40, 50)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 1):
@@ -329,7 +329,7 @@ def linetracing():
     elif (a == 1) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
         go_forward_any(30, 40)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 0):
-        go_forward_any(40, 30)
+        go_forward_any(30, 40)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 1):
         go_forward_any(40, 35)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 0):
@@ -380,19 +380,19 @@ try:
         else:
             stop()
             time.sleep(1)
-            leftPointTurn(34, 0.38)
+            rightPointTurn(34, 0.38)
             time.sleep(1)
             go_forward(38, 0.3)
             time.sleep(1)
-            rightPointTurn(33, 0.35)
+            leftPointTurn(35, 0.35)
             time.sleep(1)
-            go_forward(42, 0.6)
+            go_forward(42, 0.8)
             time.sleep(1)
-            rightPointTurn(31, 0.35)
+            leftPointTurn(32, 0.35)
             time.sleep(1)
             go_forward(30, 0.28)
             time.sleep(1)
-            leftPointTurn(28, 0.35)
+            rightPointTurn(28, 0.35)
 
 
 # Keyboard Interrupt
