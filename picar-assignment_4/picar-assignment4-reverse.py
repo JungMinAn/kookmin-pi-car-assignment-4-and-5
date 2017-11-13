@@ -287,7 +287,7 @@ def linetracing():
     elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(45, 35)
+        go_forward_any(35, 45)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 1):
@@ -295,7 +295,7 @@ def linetracing():
     elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
-        go_forward_any(13, 50)
+        go_forward_any(30, 35)
     elif (a == 0) & (b == 1) & (c == 0) & (d == 0) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 1) & (c == 0) & (d == 0) & (e == 1):
@@ -311,9 +311,9 @@ def linetracing():
     elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-        go_forward_any(12, 50)
+        go_forward_any(22, 50)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 0):
-        go_forward_any(0, 20)
+        go_forward_any(20, 0)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
         go_forward_any(35, 35)
     elif (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
@@ -380,19 +380,19 @@ try:
         else:
             stop()
             time.sleep(1)
-            rightPointTurn(34, 0.38)
+            leftPointTurn(34, 0.38)
             time.sleep(1)
             go_forward(38, 0.3)
             time.sleep(1)
-            leftPointTurn(33, 0.35)
+            rightPointTurn(33, 0.35)
             time.sleep(1)
             go_forward(42, 0.8)
             time.sleep(1)
-            leftPointTurn(31, 0.35)
+            rightPointTurn(33, 0.35)
             time.sleep(1)
             go_forward(30, 0.28)
             time.sleep(1)
-            rightPointTurn(28, 0.35)
+            leftPointTurn(28, 0.35)
 
 # Keyboard Interrupt
 except KeyboardInterrupt:
