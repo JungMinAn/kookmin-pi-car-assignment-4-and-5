@@ -287,7 +287,7 @@ def linetracing():
     elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(50, 40)
+        go_forward_any(40, 50)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 0):
         time.sleep(1)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 1):
