@@ -146,8 +146,13 @@ def rightPointTurn_any(speed):
     GPIO.output(MotorLeft_PWM, GPIO.HIGH)
     rightmotor(backward0)
     GPIO.output(MotorRight_PWM, GPIO.HIGH)
-    LeftPwm.ChangeDutyCycle(speed)
-    RightPwm.ChangeDutyCycle(speed)
+    IO = 1
+    while IO == 1:
+        LeftPwm.ChangeDutyCycle(speed)
+        RightPwm.ChangeDutyCycle(speed)
+        time.sleep(0.01)
+        c = GPIO.input(centerled)
+        IO = c
 
 def leftPointTurn(speed, running_time):
     """
@@ -163,7 +168,7 @@ def leftPointTurn(speed, running_time):
     RightPwm.ChangeDutyCycle(speed)
     time.sleep(running_time)
 
-def leftPointTurn_any(speed,):
+def leftPointTurn_any(speed):
     """
     Left point turn main module
     :param speed: Motor running speed
@@ -172,8 +177,13 @@ def leftPointTurn_any(speed,):
     GPIO.output(MotorRight_PWM, GPIO.HIGH)
     leftmotor(backward1)
     GPIO.output(MotorLeft_PWM, GPIO.HIGH)
-    LeftPwm.ChangeDutyCycle(speed)
-    RightPwm.ChangeDutyCycle(speed)
+    IO = 1
+    while IO == 1:
+        LeftPwm.ChangeDutyCycle(speed)
+        RightPwm.ChangeDutyCycle(speed)
+        time.sleep(0.01)
+        c = GPIO.input(centerled)
+        IO = c
 
 def go_forward_any(speed1, speed2):
     """
@@ -281,85 +291,58 @@ def linetracing():
     c = int(GPIO.input(centerled))
     d = int(GPIO.input(rightlessled))
     e = int(GPIO.input(rightmostled))
-    if (a == 0)&(b == 0)&(c ==0)&(d == 0)&(e == 0):
-        go_forward(50, 0.15)
-        rightPointTurn_any(25)
-    elif (a == 0) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
-        go_forward(50, 0.15)
-        if (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-            leftPointTurn_any(25)
-        else:
-            go_forward_any(30, 30)
-    elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
-        time.sleep(1)
-    elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
-        go_forward(50, 0.15)
-        if (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-            leftPointTurn_any(25)
-        else:
-            go_forward_any(30, 30)
-    elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 0):
-        time.sleep(1)
-    elif (a == 0) & (b == 0) & (c == 1) & (d == 0) & (e == 1):
-        time.sleep(1)
-    elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 0):
-        time.sleep(1)
-    elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
-        go_forward(50, 0.15)
-        if (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-            leftPointTurn_any(25)
-        else:
-            go_forward_any(30, 30)
-    elif (a == 0) & (b == 1) & (c == 0) & (d == 0) & (e == 0):
-        time.sleep(1)
-    elif (a == 0) & (b == 1) & (c == 0) & (d == 0) & (e == 1):
-        time.sleep(1)
-    elif (a == 0) & (b == 1) & (c == 0) & (d == 1) & (e == 0):
-        time.sleep(1)
-    elif (a == 0) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
-        time.sleep(1)
-    elif (a == 0) & (b == 1) & (c == 1) & (d == 0) & (e == 0):
-        time.sleep(1)
-    elif (a == 0) & (b == 1) & (c == 1) & (d == 0) & (e == 1):
-        time.sleep(1)
-    elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
-        time.sleep(1)
-    elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-        go_forward_any(20, 28)
-    elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 0):
-        go_forward(50, 0.15)
-        rightPointTurn_any(25)
-    elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
-        go_forward_any(40, 40)
-    elif (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 0):
-        time.sleep(1)
-    elif (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(35, 40)
-    elif (a == 1) & (b == 0) & (c == 1) & (d == 0) & (e == 0):
-        time.sleep(1)
-    elif (a == 1) & (b == 0) & (c == 1) & (d == 0) & (e == 1):
-        time.sleep(1)
-    elif (a == 1) & (b == 0) & (c == 1) & (d == 1) & (e == 0):
-        time.sleep(1)
+    stop()
+    time.sleep(0.1)
+    if (a == 1) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
+        go_forward_any(33, 38)
     elif (a == 1) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
-        go_forward_any(30, 40)
-    elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 0):
-        go_forward(50, 0.15)
-        rightPointTurn_any(25)
+        go_forward_any(33, 38)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 0) & (e == 1):
-        go_forward_any(30, 25)
-    elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 0):
-        time.sleep(1)
-    elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(30, 30)
-    elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 0):
-        go_forward_any(30, 20)
+        go_forward_any(38, 33)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 1):
-        go_forward_any(30, 25)
+        go_forward_any(38, 33)
+    elif (a == 1) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
+        go_forward_any(38, 38)
+    elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
+        go_forward_any(38, 38)
+    elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
+        leftPointTurn_any(36)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
-        go_forward_any(30, 17)
-    elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-        rightPointTurn_any(25)
+        rightPointTurn_any(36)
+    elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
+        leftPointTurn_any(36)
+    elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 0):
+        rightPointTurn_any(36)
+    elif (a == 0) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
+        go_forward_any(32, 32)
+    elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
+        go_forward_any(32, 32)
+    elif (a == 0) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
+        go_forward_any(32, 32)
+def determing_cross():
+    a = int(GPIO.input(leftmostled))#d
+    b = int(GPIO.input(leftlessled))#b
+    c = int(GPIO.input(centerled))#a
+    d = int(GPIO.input(rightlessled))#c
+    e = int(GPIO.input(rightmostled))#e
+    linetracing()
+    time.sleep(0.5)
+    if e ==0:
+        go_forward(40,0.45)
+        rightPointTurn(37,0.5)
+        rightPointTurn_any(37)
+    elif a == 0:
+        while a == 1:
+            linetracing()
+        if c == 0:
+            linetracing()
+        elif c == 1:
+            go_forward(40,0.45)
+            leftPointTurn(37,0.5)
+            leftPointTurn_any(37)
+    elif (c == 1)&(b == 1)&(d == 1):
+        rightPointTurn_any(42)
+    else:linetracing()
 
 
 # 5-way tracking sensor's pin number
@@ -380,13 +363,12 @@ GPIO.setup(rightmostled, GPIO.IN)
 # Main
 try:
     while True:
-        print("leftmostled  detects black line(0) or white ground(1): " + str(GPIO.input(leftmostled)))
-        print("leftlessled  detects black line(0) or white ground(1): " + str(GPIO.input(leftlessled)))
-        print("centerled    detects black line(0) or white ground(1): " + str(GPIO.input(centerled)))
-        print("rightlessled detects black line(0) or white ground(1): " + str(GPIO.input(rightlessled)))
-        print("rightmostled detects black line(0) or white ground(1): " + str(GPIO.input(rightmostled)))
-
-        linetracing()
+        print("\nleftmostled : " + str(GPIO.input(leftmostled)))
+        print("leftlessled : " + str(GPIO.input(leftlessled)))
+        print("centerled   : " + str(GPIO.input(centerled)))
+        print("rightlessled: " + str(GPIO.input(rightlessled)))
+        print("rightmostled: " + str(GPIO.input(rightmostled)))
+        determing_cross()
 
         # else:
 
