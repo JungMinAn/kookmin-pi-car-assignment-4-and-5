@@ -1,6 +1,6 @@
 """
 # Date: 2017/11/06
-# file name: picar-assignment5.py
+# file name: picar-assignment4.py
 """
 
 # Import raspberry pi's GPIO module and time module
@@ -20,7 +20,6 @@ echo = 31
 # Trig, echo in/out setting
 GPIO.setup(trig, GPIO.OUT)
 GPIO.setup(echo, GPIO.IN)
-
 
 def REVERSE(x):
     """
@@ -94,7 +93,7 @@ LeftPwm = GPIO.PWM(MotorLeft_PWM, 100)
 RightPwm = GPIO.PWM(MotorRight_PWM, 100)
 
 
-def rightSwingTurn(speed1, speed2, running_time):
+def rightSwingTurn(speed1,speed2, running_time):
     """
     Right swing turn main module
     :param speed1: Left speed
@@ -138,7 +137,6 @@ def rightPointTurn(speed, running_time):
     RightPwm.ChangeDutyCycle(speed)
     time.sleep(running_time)
 
-
 def rightPointTurn_any(speed):
     """
     Right point turn main module
@@ -157,7 +155,6 @@ def rightPointTurn_any(speed):
         IO = c
     go_forward(30,0.3)
 
-
 def leftPointTurn(speed, running_time):
     """
     Left point turn main module
@@ -171,7 +168,6 @@ def leftPointTurn(speed, running_time):
     LeftPwm.ChangeDutyCycle(speed)
     RightPwm.ChangeDutyCycle(speed)
     time.sleep(running_time)
-
 
 def leftPointTurn_any(speed):
     """
@@ -190,7 +186,6 @@ def leftPointTurn_any(speed):
         c = GPIO.input(centerled)
         IO = c
     go_forward(30,0.3)
-
 
 def go_forward_any(speed1, speed2):
     """
@@ -326,7 +321,6 @@ def linetracing():
         go_forward_any(32, 32)
     elif (a == 0) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
         go_forward_any(32, 32)
-<<<<<<< HEAD
     else:
         go_forward_any(30,30)
 def determing_cross():
@@ -342,32 +336,12 @@ def determing_cross():
         go_forward(43,0.5)
         rightPointTurn(35,0.5)
         rightPointTurn_any(33)
-=======
-
-
-def determining_cross():
-    """
-    Determine cross road module
-    """
-    a = int(GPIO.input(leftmostled))  # d
-    b = int(GPIO.input(leftlessled))  # b
-    c = int(GPIO.input(centerled))  # a
-    d = int(GPIO.input(rightlessled))  # c
-    e = int(GPIO.input(rightmostled))  # e
-    linetracing()
-    time.sleep(0.5)
-    if e == 0:
-        go_forward(40, 0.45)
-        rightPointTurn(37, 0.5)
-        rightPointTurn_any(37)
->>>>>>> 1cfecbbb2e9ac78fde6abce948811c976c3e2464
     elif a == 0:
         while a == 1:
             linetracing()
         if c == 0:
             linetracing()
         elif c == 1:
-<<<<<<< HEAD
             go_forward(42,0.2)
             leftPointTurn(31,0.3)
             leftPointTurn_any(33)
@@ -380,15 +354,6 @@ def determining_cross():
             leftPointTurn_any(37)
             count-=1
     else:linetracing()
-=======
-            go_forward(40, 0.45)
-            leftPointTurn(37, 0.5)
-            leftPointTurn_any(37)
-    elif (c == 1) & (b == 1) & (d == 1):
-        rightPointTurn_any(42)
-    else:
-        linetracing()
->>>>>>> 1cfecbbb2e9ac78fde6abce948811c976c3e2464
 
 
 # 5-way tracking sensor's pin number
@@ -409,14 +374,14 @@ GPIO.setup(rightmostled, GPIO.IN)
 # Main
 try:
     while True:
-        # Debug for 5-way tracking sensor code
         print("\nleftmostled : " + str(GPIO.input(leftmostled)))
         print("leftlessled : " + str(GPIO.input(leftlessled)))
         print("centerled   : " + str(GPIO.input(centerled)))
         print("rightlessled: " + str(GPIO.input(rightlessled)))
         print("rightmostled: " + str(GPIO.input(rightmostled)))
-        # Importing the determine way modules code
-        determining_cross()
+        determing_cross()
+
+        # else:
 
 
 # Keyboard Interrupt
@@ -431,3 +396,7 @@ except KeyboardInterrupt:
     RightPwm.ChangeDutyCycle(0)
     # GPIO pin setup has been cleared
     GPIO.cleanup()
+
+
+
+
