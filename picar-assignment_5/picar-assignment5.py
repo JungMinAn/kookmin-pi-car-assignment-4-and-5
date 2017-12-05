@@ -155,6 +155,7 @@ def rightPointTurn_any(speed):
         time.sleep(0.01)
         c = GPIO.input(centerled)
         IO = c
+    go_forward(30,0.3)
 
 
 def leftPointTurn(speed, running_time):
@@ -188,6 +189,7 @@ def leftPointTurn_any(speed):
         time.sleep(0.01)
         c = GPIO.input(centerled)
         IO = c
+    go_forward(30,0.3)
 
 
 def go_forward_any(speed1, speed2):
@@ -311,11 +313,11 @@ def linetracing():
     elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
         go_forward_any(38, 38)
     elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-        leftPointTurn_any(36)
+        leftPointTurn_any(33)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
         rightPointTurn_any(36)
     elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
-        leftPointTurn_any(36)
+        leftPointTurn_any(33)
     elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 0):
         rightPointTurn_any(36)
     elif (a == 0) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
@@ -324,6 +326,23 @@ def linetracing():
         go_forward_any(32, 32)
     elif (a == 0) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
         go_forward_any(32, 32)
+<<<<<<< HEAD
+    else:
+        go_forward_any(30,30)
+def determing_cross():
+    a = int(GPIO.input(leftmostled))#d
+    b = int(GPIO.input(leftlessled))#b
+    c = int(GPIO.input(centerled))#a
+    d = int(GPIO.input(rightlessled))#c
+    e = int(GPIO.input(rightmostled))#e
+    count = 0
+    linetracing()
+    time.sleep(0.2)
+    if e ==0:
+        go_forward(43,0.5)
+        rightPointTurn(35,0.5)
+        rightPointTurn_any(33)
+=======
 
 
 def determining_cross():
@@ -341,12 +360,27 @@ def determining_cross():
         go_forward(40, 0.45)
         rightPointTurn(37, 0.5)
         rightPointTurn_any(37)
+>>>>>>> 1cfecbbb2e9ac78fde6abce948811c976c3e2464
     elif a == 0:
         while a == 1:
             linetracing()
         if c == 0:
             linetracing()
         elif c == 1:
+<<<<<<< HEAD
+            go_forward(42,0.2)
+            leftPointTurn(31,0.3)
+            leftPointTurn_any(33)
+    elif (c == 1)&(b == 1)&(d == 1):
+        go_forward(40,0.2)
+        if count<2:
+            rightPointTurn_any(37)
+            count+=1
+        elif count==2:
+            leftPointTurn_any(37)
+            count-=1
+    else:linetracing()
+=======
             go_forward(40, 0.45)
             leftPointTurn(37, 0.5)
             leftPointTurn_any(37)
@@ -354,6 +388,7 @@ def determining_cross():
         rightPointTurn_any(42)
     else:
         linetracing()
+>>>>>>> 1cfecbbb2e9ac78fde6abce948811c976c3e2464
 
 
 # 5-way tracking sensor's pin number
