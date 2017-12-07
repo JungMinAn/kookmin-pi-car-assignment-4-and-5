@@ -238,6 +238,8 @@ def go_forward(speed, running_time):
     time.sleep(running_time)
 
 
+
+
 # def go_backward(speed, running_time):
 #     """
 #     Backward module (time limit)
@@ -312,23 +314,10 @@ def linetracing():
         go_forward_any(38, 38)
     elif (a == 1) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
         go_forward_any(38, 38)
-    elif (a == 0) & (b == 1) & (c == 1) & (d == 1) & (e == 1):
-        leftPointTurn_any(33)
-    elif (a == 1) & (b == 1) & (c == 1) & (d == 1) & (e == 0):
-        rightPointTurn_any(36)
-    elif (a == 0) & (b == 0) & (c == 1) & (d == 1) & (e == 1):
-        leftPointTurn_any(33)
-    elif (a == 1) & (b == 1) & (c == 1) & (d == 0) & (e == 0):
-        rightPointTurn_any(36)
-    elif (a == 0) & (b == 0) & (c == 0) & (d == 0) & (e == 1):
-        go_forward_any(32, 32)
-    elif (a == 0) & (b == 0) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(32, 32)
-    elif (a == 0) & (b == 1) & (c == 0) & (d == 1) & (e == 1):
-        go_forward_any(32, 32)
     else:
         go_forward_any(30, 30)
 
+count = 0
 
 def determining_cross():
     """
@@ -340,7 +329,6 @@ def determining_cross():
     c = int(GPIO.input(centerled))  # a
     d = int(GPIO.input(rightlessled))  # c
     e = int(GPIO.input(rightmostled))  # e
-    count = 0
     linetracing()
     time.sleep(0.2)
     if e == 0:
@@ -358,12 +346,7 @@ def determining_cross():
             leftPointTurn_any(33)
     elif (c == 1) & (b == 1) & (d == 1):
         go_forward(40, 0.2)
-        if count < 2:
-            rightPointTurn_any(37)
-            count += 1
-        elif count == 2:
-            leftPointTurn_any(37)
-            count -= 1
+        rightPointTurn_any(33)
     else:
         linetracing()
 
